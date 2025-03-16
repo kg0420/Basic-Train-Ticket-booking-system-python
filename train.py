@@ -33,9 +33,9 @@ class train:
         elif no_of_Actickets<self.Ac_seats:
             train.Ac_seats-=no_of_Actickets
             print(f"Seats available in AC coach  is {self.Ac_seats}")
-    def details(self,name,age,date ,coach,Tickets):
+    def details(self,date,name,age,coach,Tickets,From,To):
         with open("passenger_details.txt","a") as file:
-            file.write(f"Name: {name}, Age: {age}, Date: {date}, Coach: {coach}, Tickets: {Tickets}\n")
+            file.write(f" Date: {date}\n,Name: {name}, Age: {age}, Coach: {coach}, Tickets: {Tickets}, From: {From}, To: {To}\n")
     def registration(self):
         print("Enter Your Details for registration")
         phone_number=input("Enter phone no:-")
@@ -45,7 +45,7 @@ class train:
         if not (phone_number.isdigit()) or len(phone_number)!=10:
             print("Invalid phone number")
         elif len(password)<8:
-            print("invalid password")
+            print("Password Should be minimun of length 8")
         self.user[username]=[phone_number,password]
         print(self.user)
         print("Registration Successfull")
@@ -83,7 +83,7 @@ if __name__=="__main__":
         elif choice==3:
             print("pune junction:-3:25 pm \nLonavala Station:-4:30 pm \nKarjat Station:-5:10 pm \nKalyan Junction:- 6:30 pm \nCSMT:8 pm")
         elif choice==4:
-            print("platfom no 4(At pune junction)\nplatform no:-2(At Lonavala Station) \nplatform no:-(At Karjat Station)\n platform :-5(Kalyan Junction) \nplatform no:- 1(At CSMT)")
+            print("platfom no 4(At pune junction)\nplatform no:-2(At Lonavala Station) \nplatform no:-3(At Karjat Station)\n platform :-5(Kalyan Junction) \nplatform no:- 1(At CSMT)")
         elif choice==5:
             print(f"Seats Available in General coach is {obj.no_of_gseats}")
             print(f"Seats Available in AC coach is {obj.Acc_seats}")
@@ -94,41 +94,142 @@ if __name__=="__main__":
             print("Please Select  Which class Ticket you want to book")
             print("1.Genral\n 2.AC Class\n 3.Chaired AC Class")
             choice2=int(input("Please Select  Which class Ticket you want to book:- "))
-            name=input("Enter your name: ")
-            age=int(input("Enter your Age: "))
-            while True:
-                travel_date = input("Enter travel date (YYYY-MM-DD): ")
-                try:
-                    travel_date = datetime.strptime(travel_date, "%Y-%m-%d").date()
-                    if travel_date >= datetime.today().date():
-                        break
-                    else:
-                        print("You cannot book tickets for past dates.")
-                except ValueError:
-                    print("Invalid date format! Please enter in YYYY-MM-DD format.")
+            
+            
             if choice2==1:
                 no_of_gtickets=int(input("Enter the number of tickets you want:- "))            
-                obj.details(name,age,"GENERAL",no_of_gtickets)
+                for i in range (0,no_of_gtickets):
+                    while True:
+                        travel_date = input("Enter travel date (YYYY-MM-DD): ")
+                        try:
+                            travel_date = datetime.strptime(travel_date, "%Y-%m-%d").date()
+                            if travel_date >= datetime.today().date():
+                                break
+                            else:
+                                print("You cannot book tickets for past dates.")
+                        except ValueError:
+                            print("Invalid date format! Please enter in YYYY-MM-DD format.")
+                    print(f"Enter the details of passenger {i+1}")
+                    name=input("Passenger Name :")
+                    age=int(input("Passenger Age: "))
+                    From=input("From Station: ")
+                    To=input("To Station: ")
+                    if From=="pune" and To=="Csmt":
+                        print("The price of ticket is ₹150")
+                    elif From=="pune" and To=="Lonavala":
+                        print("The price of ticket is ₹100")
+                    elif From=="pune" and To=="Karjat":
+                        print("The price of ticket is ₹80")
+                    elif From=="pune" and To=="Kalyan":
+                        print("The price of ticket is ₹120")
+                    elif From=="Lonavala" and To=="Karjat":
+                        print("The price of ticket is ₹50")
+                    elif From=="Lonavala" and To=="Kalyan":
+                        print("The price of ticket is ₹70")
+                    elif From=="Lonavala" and To=="CSMT":
+                        print("The price of ticket is ₹100")
+                    elif From=="Karjat" and To=="Kalyan":
+                        print("The price of ticket is ₹40")
+                    elif From=="Karjat" and To=="CSMT":
+                        print("The price of ticket is ₹80")
+                    elif From=="Kalyan" and To=="CSMT":
+                        print("The price of ticket is ₹40")
+
+                    obj.details(travel_date,name,age,"GENERAL",no_of_gtickets,From,To)
                 obj.general(no_of_gtickets)
                 print(f"The {no_of_gtickets} seats are Booked in General coach")
-                obj.details(name, age, "GENERAL", no_of_gtickets)
-                print("Your requirement is fulllfilled")
+                obj.details(name, age,travel_date,"GENERAL",no_of_gtickets,From,To)
+                print("Your requirement is fullfilled")
                 print("Happy Journey......\nRegards \nINDIAN RAILWAY")
-                
+               
             elif choice2==2:
+                no_of_gtickets=int(input("Enter the number of tickets you want:- "))            
+                for i in range (0,no_of_gtickets):
+                    while True:
+                        travel_date = input("Enter travel date (YYYY-MM-DD): ")
+                        try:
+                            travel_date = datetime.strptime(travel_date, "%Y-%m-%d").date()
+                            if travel_date >= datetime.today().date():
+                                break
+                            else:
+                                print("You cannot book tickets for past dates.")
+                        except ValueError:
+                            print("Invalid date format! Please enter in YYYY-MM-DD format.")
+                    print(f"Enter the details of passenger {i+1}")
+                    name=input("Passenger Name :")
+                    age=int(input("Passenger Age: "))
+                    From=input("From Station: ")
+                    To=input("To Station: ")
+                    if From=="pune" and To=="Csmt":
+                        print("The price of ticket is ₹150")
+                    elif From=="pune" and To=="Lonavala":
+                        print("The price of ticket is ₹100")
+                    elif From=="pune" and To=="Karjat":
+                        print("The price of ticket is ₹80")
+                    elif From=="pune" and To=="Kalyan":
+                        print("The price of ticket is ₹120")
+                    elif From=="Lonavala" and To=="Karjat":
+                        print("The price of ticket is ₹50")
+                    elif From=="Lonavala" and To=="Kalyan":
+                        print("The price of ticket is ₹70")
+                    elif From=="Lonavala" and To=="CSMT":
+                        print("The price of ticket is ₹100")
+                    elif From=="Karjat" and To=="Kalyan":
+                        print("The price of ticket is ₹40")
+                    elif From=="Karjat" and To=="CSMT":
+                        print("The price of ticket is ₹80")
+                    elif From=="Kalyan" and To=="CSMT":
+                        print("The price of ticket is ₹40")
                 no_of_Actickets=int(input("Enter the number of tickets you want:- "))
                 obj.AC(no_of_Actickets)
                 print(f"The {no_of_Actickets} seats are Booked in AC coach")
-                obj.details(name, age, "AC", no_of_gtickets)
-                print("Your requirement is fulllfilled")
+                obj.details(travel_date,name, age, "AC", no_of_gtickets,From,To)
+                print("Your requirement is fullfilled")
                 print("Happy Journey......\nRegards \nKrish Gupta")
                    
-            if choice2==3: 
+            if choice2==3:
+                no_of_gtickets=int(input("Enter the number of tickets you want:- "))            
+                for i in range (0,no_of_gtickets):
+                    while True:
+                        travel_date = input("Enter travel date (YYYY-MM-DD): ")
+                        try:
+                            travel_date = datetime.strptime(travel_date, "%Y-%m-%d").date()
+                            if travel_date >= datetime.today().date():
+                                break
+                            else:
+                                print("You cannot book tickets for past dates.")
+                        except ValueError:
+                            print("Invalid date format! Please enter in YYYY-MM-DD format.")
+                    print(f"Enter the details of passenger {i+1}")
+                    name=input("Passenger Name :")
+                    age=int(input("Passenger Age: "))
+                    From=input("From Station: ")
+                    To=input("To Station: ")
+                    if From=="pune" and To=="Csmt":
+                        print("The price of ticket is ₹150")
+                    elif From=="pune" and To=="Lonavala":
+                        print("The price of ticket is ₹100")
+                    elif From=="pune" and To=="Karjat":
+                        print("The price of ticket is ₹80")
+                    elif From=="pune" and To=="Kalyan":
+                        print("The price of ticket is ₹120")
+                    elif From=="Lonavala" and To=="Karjat":
+                        print("The price of ticket is ₹50")
+                    elif From=="Lonavala" and To=="Kalyan":
+                        print("The price of ticket is ₹70")
+                    elif From=="Lonavala" and To=="CSMT":
+                        print("The price of ticket is ₹100")
+                    elif From=="Karjat" and To=="Kalyan":
+                        print("The price of ticket is ₹40")
+                    elif From=="Karjat" and To=="CSMT":
+                        print("The price of ticket is ₹80")
+                    elif From=="Kalyan" and To=="CSMT":
+                        print("The price of ticket is ₹40") 
                 no_of_Acctickets=int(input("Enter the number of tickets you want:- "))
                 obj.Chair_Ac(no_of_Acctickets)
                 print(f"The {no_of_Acctickets} seats are Booked in Chaired AC coach")
-                obj.details(name, age, "Chaired AC", no_of_gtickets)
-                print("Your requirement is fulllfilled")
+                obj.details(travel_date,name, age,"Chaired AC", no_of_gtickets,From,To)
+                print("Your requirement is fullfilled")
                 print("Happy Journey......\nRegards \nKrish Gupta")
         choice3=input("print C to continue and Q to exit the application:- ").islower()
         if choice3=="C":
